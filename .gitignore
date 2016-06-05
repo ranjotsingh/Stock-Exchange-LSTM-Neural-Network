@@ -110,3 +110,8 @@ $RECYCLE.BIN/
 *.dat~
 *.py~
 *.csv
+
+# Output files
+out.txt
+training_data.txt
+training_data_norm.txt
