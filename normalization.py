@@ -5,13 +5,15 @@ normfilename = 'training_data_norm.txt'
 
 with open(origfilename, 'r') as f:
     formatdata = f.readline()
-
-x = np.loadtxt(origfilename, usecols=range(0,3), skiprows=1)
+	
+numIn, numOut = [int(formatdata) for formatdata in formatdata.split() if formatdata.isdigit()]
+	
+x = np.loadtxt(origfilename, usecols=range(0,numIn+numOut), skiprows=1)
 
 in_min = min(x[:,0])
 in_max = max(x[:,0])
-out_min = min(x[:,2])
-out_max = max(x[:,2])
+out_min = min(x[:,numIn])
+out_max = max(x[:,numIn])
 
 norm = True
 if norm:
@@ -19,9 +21,9 @@ if norm:
 		norm = False
 
 if norm:
-    normx=x[:,:2]
+    normx=x[:,:numIn]
     normx=(normx-in_min)/(in_max-in_min)
-    normy=(x[:,2])[:,None]
+    normy=(x[:,numIn])[:,None]
     normy=(normy-out_min)/(out_max-out_min)
     normdata=np.concatenate((normx,normy),axis=1)
 
