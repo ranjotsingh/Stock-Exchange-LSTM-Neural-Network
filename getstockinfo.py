@@ -1,9 +1,9 @@
 import urllib.request
-import datetime
+import datetime as dt
 
 def validate(date_text):
 	try:
-		datetime.datetime.strptime(date_text, '%m/%d/%Y')
+		dt.datetime.strptime(date_text, '%m/%d/%Y')
 		return True
 	except:
 		print("ERROR: Incorrect data format (must be MM/DD/YYYY). Try again.")
@@ -58,9 +58,8 @@ with open(tickername + '.txt', 'w') as f:
 import numpy as np
 x = np.genfromtxt(tickername + '.txt', dtype='str', usecols=range(0,1))
 
-import datetime as dt
 def excel_date(date1):
-	date = datetime.datetime.strptime(date1, '%d-%b-%y')
+	date = dt.datetime.strptime(date1, '%d-%b-%y')
 	temp = dt.datetime(1899, 12, 31)
 	delta = date - temp
 	return int(float(delta.days) + (float(delta.seconds) / 86400)+1.0)
