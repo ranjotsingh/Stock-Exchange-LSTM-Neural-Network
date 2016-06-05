@@ -1,14 +1,5 @@
 from random import randint
 
-with open('norm.dat', 'r') as f:
-    norm_line = f.readline()
-    norm_line
-
-norm = True if  == 'y' else False
-trainOptions = f.readline().split()
-numInputs = (int)(trainOptions[trainOptions.index('Inputs:')+1])
-numOutputs = (int)(trainOptions[trainOptions.index('Outputs:')+1])
-
 name="training_data.txt"
 file=open(name,'w')
 file.write('Inputs: 2 Outputs: 1\n')
@@ -16,6 +7,8 @@ file.write('Inputs: 2 Outputs: 1\n')
 min = 0.0
 max = 10.0
 tmax = max+max
+
+norm = False
 if norm:
 	if (max-min) == 0:
 		norm = False

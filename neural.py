@@ -1,25 +1,5 @@
 import random, math
 
-###################### NORM INFORMATION ######################
-
-norm = True
-min = 0.0
-max = 10.0
-tmax = max+max
-
-##############################################################
-
-if (max-min) == 0:
-	norm = False
-elif (tmax-min) == 0:
-	norm = False
-
-def inflatten(elem):
-	return elem*(max-min) + min
-	
-def outflatten(elem):
-	return elem*(tmax-min) + min
-
 class Connection:
 	def __init__(self):
 		self.weight = Connection.randomWeight()
@@ -180,7 +160,7 @@ class Net:
 # 0 1 1
 # 1 0 1
 # 1 1 0
-with open('training_data.txt') as f:
+with open('training_data_norm.txt') as f:
 	trainOptions = f.readline().split()
 	numInputs = (int)(trainOptions[trainOptions.index('Inputs:')+1])
 	numOutputs = (int)(trainOptions[trainOptions.index('Outputs:')+1])
@@ -205,15 +185,10 @@ with open('training_data.txt') as f:
 		myNet.feedForward(inputVals)
 		myNet.backProp(targetVals)
 		
-		if norm:
-			inputVals = list(map(inflatten, inputVals))
-			targetVals = list(map(outflatten, targetVals))
 		print('\nPass: {0}' .format(iLine))
 		print('Inputs: {0}\nTargets: {1}' .format(inputVals, targetVals))
 		
 		resultVals = myNet.getResults()
 		
-		if norm:
-			resultVals = list(map(outflatten, resultVals))
 		print('Network results: {0}' .format(resultVals))
 		myNet.reportRecentAverageError()
