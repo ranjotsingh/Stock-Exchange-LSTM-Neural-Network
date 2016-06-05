@@ -69,6 +69,7 @@ for i in range(0, x.shape[0]):
 x = x.astype(int)
 y = np.loadtxt(tickername + '.txt', usecols=range(1,2))
 data=np.column_stack((x,y))
+np.random.shuffle(data)
 np.savetxt('training_data.txt', data, '%5.2f')
 
 with open('training_data.txt', 'r+') as f:
